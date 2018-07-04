@@ -1,6 +1,8 @@
 const config = require('sapper/webpack/config.js');
 const pkg = require('../package.json');
 
+const preprocessOptions = require('./preprocess.config.js')
+
 module.exports = {
 	entry: config.server.entry(),
 	output: config.server.output(),
@@ -13,10 +15,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.html$/,
+        test: /\.(html|pug)$/,
 				use: {
 					loader: 'svelte-loader',
 					options: {
+            preprocess: require('svelte-preprocess')(preprocessOptions),
 						css: false,
 						generate: 'ssr'
 					}

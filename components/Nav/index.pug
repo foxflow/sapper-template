@@ -1,0 +1,8 @@
+nav
+  ul
+    li
+      a(class!='{path === "/" ? "selected" : ""}' href='.') home
+    li
+      a(class!='{path === "/about" ? "selected" : ""}' href='about') about
+    li
+      a(rel='prefetch' class!='{path.startsWith("/blog") ? "selected" : ""}' href='blog') blog

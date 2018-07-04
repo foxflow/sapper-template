@@ -1,4 +1,7 @@
-# sapper-template
+# sapper-template PUG edition
+
+### NB. This fork adds pug (jade) preprocessing with a few mixins to make blocks a bit nicer
+#### see routes/blog/index.pug and the components/Nav/ folders for examples.
 
 The default [Sapper](https://github.com/sveltejs/sapper) template. To clone it and get started:
 
