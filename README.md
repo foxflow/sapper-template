@@ -1,12 +1,12 @@
-# sapper-template PUG edition
+# sapper-template (experimental PUG edition)
 
 ### NB. This fork adds pug (jade) preprocessing with a few mixins to make blocks a bit nicer
-#### see routes/blog/index.pug and the components/Nav/ folders for examples.
+#### see routes/blog/index.pug and the components/Nav/ folders for examples with code split into different files for template, js, and styles
 
-The default [Sapper](https://github.com/sveltejs/sapper) template. To clone it and get started:
+An experimental [Sapper](https://github.com/sveltejs/sapper) + PUG/jade template. To clone it and get started:
 
 ```bash
-npx degit sveltejs/sapper-template my-app
+npx degit foxflow/sapper-template my-app
 cd my-app
 npm install # or yarn!
 npm run dev
@@ -16,6 +16,44 @@ Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
 Consult [sapper.svelte.technology](https://sapper.svelte.technology) for help getting started.
 
+
+## PUG Mixins
+##### In the interest of syntax clarity vs. embedding literal Svelte template conditions/loops, we provide a several block mixins:
+```
+mixin each(loop)
+  | #{'{#each'} #{loop} }
+  if block
+    block
+  | #{'{/each}'}
+mixin if(condition)
+  | #{'{#if'} #{condition} }
+  if block
+    block
+  | #{'{/if}'}
+mixin else
+  | #{'{:else}'}
+mixin await(promise)
+  | #{'{#if'} #{promise} }
+  if block
+    block
+  | #{'{/await}'}
+mixin catch(error)
+  | #{'{:catch'} #{error} }
+mixin then(answer)
+  | #{'{:then'} #{answer} }
+
+```
+
+##### This allows the following in preprocesssed Svelte/PUG component templates
+```
+h1 Recent posts
+ul
+  +each(`posts as post`)
+    li
+      a(rel='prefetch' href!='blog/{post.slug}') { post.title }   
+```
+##### Other ideas?
+Some effort was expended trying to port native pug conditionals/loops into the Svelte preprocessing system using compileClient, etc.  However, accounting for all of Svelte's $store magic, etc might prove problematic.  Other ideas and approaches are welcomed, as are PR's with fixes/omissions to our approach here.
 
 ## Structure
 
