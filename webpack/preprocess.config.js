@@ -14,7 +14,7 @@ mixin if(condition)
 mixin else
   | #{'{:else}'}
 mixin await(promise)
-  | #{'{#if'} #{promise} }
+  | #{'{#await'} #{promise} }
   if block
     block
   | #{'{/await}'}
