@@ -2,26 +2,37 @@ const pug = require('pug')
 
 const helpers = `
 mixin each(loop)
-  | #{'{#each'} #{loop} }
+  | {#each #{loop}}
   if block
     block
-  | #{'{/each}'}
+  | {/each}
+
 mixin if(condition)
-  | #{'{#if'} #{condition} }
+  | {#if #{condition}}
   if block
     block
-  | #{'{/if}'}
+  | {/if}
+
 mixin else
-  | #{'{:else}'}
-mixin await(promise)
-  | #{'{#await'} #{promise} }
+  | {:else}
   if block
     block
-  | #{'{/await}'}
-mixin catch(error)
-  | #{'{:catch'} #{error} }
+
+mixin await(promise)
+  | {#await #{promise}}
+  if block
+    block
+  | {/await}
+
 mixin then(answer)
-  | #{'{:then'} #{answer} }
+  | {:then #{answer}}
+  if block
+    block
+
+mixin catch(error)
+  | {:catch #{error}}
+  if block
+    block
 `
 
 module.exports = {
