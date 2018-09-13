@@ -21,27 +21,37 @@ Consult [sapper.svelte.technology](https://sapper.svelte.technology) for help ge
 ##### In the interest of syntax clarity vs. embedding literal Svelte template conditions/loops, we provide a several block mixins:
 ```
 mixin each(loop)
-  | #{'{#each'} #{loop} }
+  | {#each #{loop}}
   if block
     block
-  | #{'{/each}'}
-mixin if(condition)
-  | #{'{#if'} #{condition} }
-  if block
-    block
-  | #{'{/if}'}
-mixin else
-  | #{'{:else}'}
-mixin await(promise)
-  | #{'{#if'} #{promise} }
-  if block
-    block
-  | #{'{/await}'}
-mixin catch(error)
-  | #{'{:catch'} #{error} }
-mixin then(answer)
-  | #{'{:then'} #{answer} }
+  | {/each}
 
+mixin if(condition)
+  | {#if #{condition}}
+  if block
+    block
+  | {/if}
+
+mixin else
+  | {:else}
+  if block
+    block
+
+mixin await(promise)
+  | {#await #{promise}}
+  if block
+    block
+  | {/await}
+
+mixin then(answer)
+  | {:then #{answer}}
+  if block
+    block
+
+mixin catch(error)
+  | {:catch #{error}}
+  if block
+    block
 ```
 
 ##### This allows the following in preprocesssed Svelte/PUG component templates
